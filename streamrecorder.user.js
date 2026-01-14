@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Stream recorder for adult cam sites that do not support HLS
+// @name         Mjz - Stream recorder for adult cam sites that do not support HLS
 // @namespace    Everywhere
 // @version      1.0.7
 // @description  Record stripchat, livejasmin and other cam sites that do not full support HLS/m3u8
@@ -17,8 +17,6 @@
 // @noframes
 // @run-at       document-end
 // @grant        none
-// @downloadURL https://update.sleazyfork.org/scripts/508891/Stream%20recorder%20for%20adult%20cam%20sites%20that%20do%20not%20support%20HLS.user.js
-// @updateURL https://update.sleazyfork.org/scripts/508891/Stream%20recorder%20for%20adult%20cam%20sites%20that%20do%20not%20support%20HLS.meta.js
 // ==/UserScript==
 
 
@@ -164,12 +162,12 @@
     }
 
     function startDownload() {
-        blob = new Blob(recordedBlobs, {type: 'video/webm'});
+        blob = new Blob(recordedBlobs, {type: 'video/mp4'});
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.style.display = 'none';
         a.href = url;
-        a.download = recName+'.webm';
+        a.download = recName+'.mp4';
         document.body.appendChild(a);
         a.click();
         setTimeout(function(){
