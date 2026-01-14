@@ -167,7 +167,7 @@
         var a = document.createElement('a');
         a.style.display = 'none';
         a.href = url;
-        a.download = recName+'.mp4';
+        a.download = recName+ formatCurrentTime('YYMMDD_HHmmss') +'.mp4';
         document.body.appendChild(a);
         a.click();
         setTimeout(function(){
@@ -355,3 +355,33 @@
         document.onmousemove = null;
     }
 })();
+
+/**
+ * 格式化当前时间为指定格式
+ * @param {string} format 格式模板，支持 YYYY-MM-DD HH:mm:ss SSS
+ * @returns {string} 格式化后的时间字符串
+ */
+function formatCurrentTime(format = 'YYYY-MM-DD HH:mm:ss') {
+    const now = new Date();
+    // 补零函数：确保数字是两位数（如 9 → 09）
+    const padZero = (num) => num.toString().padStart(2, '0');
+    
+    // 提取时间各部分
+    const year = now.getFullYear(); // 年（4位）
+    const month = padZero(now.getMonth() + 1); // 月（注意：月份从0开始，需+1）
+    const day = padZero(now.getDate()); // 日
+    const hour = padZero(now.getHours()); // 时（24小时制）
+    const minute = padZero(now.getMinutes()); // 分
+    const second = padZero(now.getSeconds()); // 秒
+    const millisecond = now.getMilliseconds().toString().padStart(3, '0'); // 毫秒
+  
+    // 替换格式模板中的占位符
+    return format
+      .replace('YYYY', year)
+      .replace('MM', month)
+      .replace('DD', day)
+      .replace('HH', hour)
+      .replace('mm', minute)
+      .replace('ss', second)
+      .replace('SSS', millisecond);
+  }
