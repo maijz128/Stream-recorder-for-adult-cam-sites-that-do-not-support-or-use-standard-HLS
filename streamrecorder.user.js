@@ -167,7 +167,7 @@
         var a = document.createElement('a');
         a.style.display = 'none';
         a.href = url;
-        a.download = recName+ formatCurrentTime('YYMMDD_HHmmss') +'.mp4';
+        a.download = recName+ formatCurrentTime('-YYMMDD_HHmmss') +'.mp4';
         document.body.appendChild(a);
         a.click();
         setTimeout(function(){
@@ -378,6 +378,7 @@ function formatCurrentTime(format = 'YYYY-MM-DD HH:mm:ss') {
     // 替换格式模板中的占位符
     return format
       .replace('YYYY', year)
+      .replace('YY', year.replace(/(\d{4})/, '$1').slice(2))
       .replace('MM', month)
       .replace('DD', day)
       .replace('HH', hour)
